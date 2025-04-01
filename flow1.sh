@@ -20,10 +20,12 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 JSON_FILE="/etc/secflow/me.json"
+  apt-get update -y
 
 if ! command -v jq &>/dev/null; then
-  echo "jq is not installed. Please install it (e.g., apt-get install jq) and rerun."
-  exit 1
+  echo "jq is not installed. Installing now..."
+  apt-get install -y jq
+  echo "jq has been installed."
 fi
 
 if [ ! -f "$JSON_FILE" ]; then
